@@ -12,13 +12,13 @@ package = "axplat-aarch64-dyn"          # str
 # Platform family (deprecated).
 family = "" # str
 # Number of CPUs.
-cpu-num = 1                                   # uint
+cpu-num = 8                                   # uint
 # No need.
 phys-memory-base = 0                            # uint
 # No need.
 phys-memory-size = 0x0                          # uint
 # No need.
-kernel-base-paddr = 0x0                         # uint
+kernel-base-paddr = 0x400000                         # uint
 # Base virtual address of the kernel image.
 kernel-base-vaddr = "0xffff_8000_0000_0000"     # uint
 # No need.

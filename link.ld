@@ -5,6 +5,8 @@ __SMP = {{SMP}};
 INCLUDE "pie_boot.x"
 STACK_SIZE = 0x40000;
 
+
+
 ENTRY(_start)
 SECTIONS
 {
@@ -30,6 +32,36 @@ SECTIONS
         *(.init_array .init_array.*)
         __init_array_end = .;
     }
+    debug_abbrev : {
+        . += SIZEOF(.debug_abbrev);
+    }
+    debug_addr : {
+        . += SIZEOF(.debug_addr);
+    }
+    debug_aranges : {
+        . += SIZEOF(.debug_aranges);
+    }
+    debug_info : {
+        . += SIZEOF(.debug_info);
+    }
+    debug_line : {
+        . += SIZEOF(.debug_line);
+    }
+    debug_line_str : {
+        . += SIZEOF(.debug_line_str);
+    }
+    debug_ranges : {
+        . += SIZEOF(.debug_ranges);
+    }
+    debug_rnglists : {
+        . += SIZEOF(.debug_rnglists);
+    }
+    debug_str : {
+        . += SIZEOF(.debug_str);
+    }
+    debug_str_offsets : {
+        . += SIZEOF(.debug_str_offsets);
+    }
 
     .data : ALIGN(4K) {
         _erodata = .;
@@ -44,6 +76,11 @@ SECTIONS
         *(.data .data.*)
         *(.sdata .sdata.*)
         *(.got .got.*)
+
+        . = ALIGN(0x10);
+        _ex_table_start = .;
+        KEEP(*(__ex_table))
+        _ex_table_end = .;
     }
 
     .tdata : ALIGN(0x10) {
@@ -109,7 +146,7 @@ SECTIONS {
     linkm2_PAGE_FAULT : { *(linkm2_PAGE_FAULT) }
     linkme_SYSCALL : { *(linkme_SYSCALL) }
     linkm2_SYSCALL : { *(linkm2_SYSCALL) }
-    scope_local : { *(scope_local) }
+    axns_resource : { *(axns_resource) }
 }
 INSERT AFTER .tbss;
 
